@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>moments</title>
+  <meta name="description" content="using datalist (html element), moment.js and draggabilly">
+  <!-- Moment.js and Moment-Timezone -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.32/moment-timezone-with-data-10-year-range.min.js"></script>
+
+  <!-- Draggabilly -->
+  <script src="https://unpkg.com/draggabilly@3/dist/draggabilly.pkgd.min.js"></script>
+
+  <!-- Script.js -->
+  <script src="script.min.js" defer></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Spectral&family=Lora&display=swap');
+
+    :root {
+      --primary: white;
+      --secondary: rgb(107, 107, 220);
+
+      --bg: white;
+      --bg-2: rgb(230, 216, 216);
+
+      --font-1: spectral;
+      --font-2: lora;
+      --font-3: lora;
+
+      --spacer: 1rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      line-height: .8;
+      max-width: 70rem;
+
+      min-height: 100vh;
+      min-height: 100svh;
+      /* overflow: hidden; */
+      overflow-x: hidden;
+      position: relative;
+
+      display: grid;
+      align-content: center;
+    }
+
+
+
+
+    input,
+    button {
+      background: var(--primary);
+      border: none;
+      padding: .5rem .7rem;
+      margin-bottom: .7em;
+      border-radius: .2rem;
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      background: var(--secondary);
+      color: var(--primary);
+      padding: .5rem;
+
+    }
+
+    h2 {
+      margin-bottom: .7em;
+    }
+
+
+    .grid {
+      display: grid;
+      padding: var(--spacer);
+      gap: .5rem;
+
+      max-width: 40rem;
+      margin-inline: auto;
+    }
+
+
+    [id^="clock-"] {
+      cursor: pointer;
+      outline-color: 1px solid;
+
+      font-size: clamp(1.1rem, 3vw + 10vw, 3rem);
+      font-size: clamp(1.5rem, 5vw + 10vw, 5rem);
+
+      padding: var(--spacer);
+
+      user-select: none;
+      max-width: calc(100vw - var(--spacer) * 2);
+      margin-inline: auto;
+      word-wrap: break-word;
+
+      text-align: center;
+
+
+      white-space: pre-wrap;
+      /* Preserve line breaks added in js with    \r\n */
+
+
+    }
+
+    [id^="clock-"]::first-line {
+      font-size: .7em;
+    }
+
+
+
+    #clock-local {
+      color: rgb(250, 145, 162);
+      /* font-size: clamp(1.5rem, 5vw + 10vw, 5rem); */
+
+    }
+
+    #added-clocks-container>* {
+      color: rgb(133, 252, 133);
+      font-family: var(--font-2);
+
+    }
+
+    #added-clocks-container>:nth-child(2n) {
+      color: rgb(127, 171, 252);
+      font-family: var(--font-3);
+
+    }
+
+    #added-clocks-container>:nth-child(3n) {
+      color: rgb(252, 119, 71);
+      font-family: var(--font-3);
+
+    }
+
+
+    .none {
+      display: none !important;
+    }
+
+    .top-95 {
+      /* position: absolute; */
+      position: fixed;
+      /* fixed porque body ya no tiene una altura fija de 100 */
+      bottom: 0;
+      right: 0;
+      left: 0;
+      transform: translateY(20%);
+      transition: all .2s ease;
+
+      padding-bottom: 1.5rem;
+      opacity: 0;
+      background: var(--bg-2);
+
+    }
+
+    .top-95.bottom-0 {
+      opacity: 1;
+      transform: translateY(0%);
+
+    }
+
+    .absolute-b {
+      position: fixed;
+      bottom: 0;
+      /* right: var(--spacer); */
+      /* left: var(--spacer); */
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .5rem;
+      z-index: 9;
+
+      padding-inline: var(--spacer);
+      max-width: 40rem;
+      right: 0;
+      left: 0;
+      margin-inline: auto;
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <div>
+    <div id="clock-local">
+    </div>
+  </div>
+
+  <div id="added-clocks-container"></div>
+
+  <div class="absolute-b">
+    <button id="toggleClockForm">Add another clock</button>
+    <button onclick="clearLocalStorage()">Reset all</button>
+  </div>
+
+  <div class="top-95">
+
+    <div class="grid">
+      <h2>Add some clocks</h2>
+
+      <label for="continent">Continent</label>
+      <input type="text" id="continent" list="continents" placeholder="Filtering by continent is optional">
+
+      <label for="cities">City*</label>
+      <input type="text" id="city" list="cities" placeholder="Enter City">
+
+
+      <button onclick="addClock()">Add Clock</button>
+    </div>
+  </div>
+
+  <datalist id="continents">
+    <option value="Africa">
+    <option value="America">
+    <option value="Antarctica">
+    <option value="Arctic">
+    <option value="Asia">
+    <option value="Atlantic">
+    <option value="Australia">
+    <option value="Europe">
+    <option value="Indian">
+    <option value="Pacific">
+  </datalist>
+  <datalist id="cities"></datalist>
+</body>
+
+</html>
