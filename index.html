@@ -1,19 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>moments</title>
+
+
   <link rel="icon" type="image/svg+xml" href="icon.svg" />
-
-  <!-- Moment.js and Moment-Timezone -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.32/moment-timezone-with-data-10-year-range.min.js"></script>
-
-  <!-- Draggabilly -->
-  <script src="https://unpkg.com/draggabilly@3/dist/draggabilly.pkgd.min.js"></script>
-
-  <!-- Script.js -->
-  <script src="script.min.js" defer></script>
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Spectral&family=Lora&display=swap');
@@ -52,9 +46,6 @@
       align-content: center;
     }
 
-
-
-
     input,
     button {
       background: var(--primary);
@@ -70,13 +61,11 @@
       background: var(--secondary);
       color: var(--primary);
       padding: .5rem;
-
     }
 
     h2 {
       margin-bottom: .7em;
     }
-
 
     .grid {
       display: grid;
@@ -187,10 +176,21 @@
 
     }
   </style>
+
+  <!-- Moment.js and Moment-Timezone -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.32/moment-timezone-with-data-10-year-range.min.js"></script>
+
+  <!-- Draggabilly -->
+  <script src="https://unpkg.com/draggabilly@3/dist/draggabilly.pkgd.min.js"></script>
+
+  <!-- Script.js -->
+  <script src="script.min.js" defer></script>
+
+
 </head>
 
 <body>
-
   <div>
     <div id="clock-local">
     </div>
